@@ -1,1 +1,1 @@
-export const selectorTodos = state => state.todos;
+export const selectorTodos = state => state.todo;
