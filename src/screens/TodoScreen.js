@@ -9,22 +9,20 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  addTodos,
-  deleteTodos,
-  compoletedTodo,
-} from '../redux/Action/Todos.Action';
+
 import selector from '../redux/selector/index';
 import {CheckBox} from 'react-native-elements';
+import {action} from '../redux/slice/todo';
+
 const {width, height} = Dimensions.get('window');
 
 const Item = ({item}) => {
-  const [check1, setCheck1] = useState(false);
   const dispatch = useDispatch();
 
   const onDeleteTodo = id => {
-    dispatch(deleteTodos(id));
+    dispatch(action.deleteTodo(id));
   };
+
   return (
     <View style={styles.itemTodo}>
       <View
@@ -35,7 +33,7 @@ const Item = ({item}) => {
         }}>
         <CheckBox
           checked={item.completed}
-          onPress={() => dispatch(compoletedTodo(item.id))}
+          onPress={() => dispatch(action.completeTodo(item.id))}
         />
         <Text>{item.todo}</Text>
       </View>
@@ -59,13 +57,14 @@ const TodoScreen = () => {
   // dispatch(addTodos(0));
   const todos = useSelector(selector.selectorTodos);
   console.log(
-    'DEBUG: - file: TodoScreen.js - line 69 - TodoScreen - todos',
+    'DEBUG: - file: TodoScreen.js - line 59 - TodoScreen - todos',
     todos,
   );
+
   const [todo, setTodo] = useState('');
 
   const onAddTodo = () =>
-    dispatch(addTodos({id: random(), todo, completed: false}));
+    dispatch(action.addTodo({id: random(), todo, completed: false}));
 
   const renderItem = ({item}) => <Item item={item} />;
   return (
