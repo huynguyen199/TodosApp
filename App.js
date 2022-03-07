@@ -5,6 +5,7 @@ import configureStore from './src/redux/configureStore';
 const store = configureStore();
 
 const App = () => {
+  console.log('test');
   return (
     <Provider store={store}>
       <TodoScreen />
