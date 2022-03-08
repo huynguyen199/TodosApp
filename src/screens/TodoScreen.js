@@ -13,13 +13,13 @@ import {
   addTodos,
   deleteTodos,
   compoletedTodo,
+  postTodos,
 } from '../redux/Action/Todos.Action';
 import selector from '../redux/selector/index';
 import {CheckBox} from 'react-native-elements';
 const {width, height} = Dimensions.get('window');
 
 const Item = ({item}) => {
-  const [check1, setCheck1] = useState(false);
   const dispatch = useDispatch();
 
   const onDeleteTodo = id => {
@@ -37,7 +37,7 @@ const Item = ({item}) => {
           checked={item.completed}
           onPress={() => dispatch(compoletedTodo(item.id))}
         />
-        <Text>{item.todo}</Text>
+        <Text>{item.title}</Text>
       </View>
       <TouchableOpacity
         onPress={() => onDeleteTodo(item.id)}
@@ -65,7 +65,7 @@ const TodoScreen = () => {
   const [todo, setTodo] = useState('');
 
   const onAddTodo = () =>
-    dispatch(addTodos({id: random(), todo, completed: false}));
+    dispatch(postTodos({id: random(), title: todo, completed: false}));
 
   const renderItem = ({item}) => <Item item={item} />;
   return (

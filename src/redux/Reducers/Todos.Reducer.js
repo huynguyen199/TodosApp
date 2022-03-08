@@ -4,8 +4,10 @@ const initialTodos = [];
 
 export default (state = initialTodos, action) => {
   switch (action.type) {
+    case types.GET_TODO:
+      return [...action.payload];
+
     case types.ADD_TODO:
-      console.log('addd todos', action, 'state' + state);
       return [...state, action.payload];
     case types.DELETE_TODO:
       return state.filter(item => item.id !== action.payload.id);
